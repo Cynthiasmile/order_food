@@ -1,0 +1,85 @@
+<extend name="Application/Admin/View/Layout/admin.html" />
+<block name="content">
+	<table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th>商户名称</th>
+          <th>商户电话</th>
+          <th>营业时间</th>
+          <th>商户地址</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+	    <volist name="merchants" id="merchant">
+	    	<tr>
+	          <th scope="row">{{$merchant.id}}</th>
+	          <td><a href="#" class="MerchantName"><span>{{$merchant.name}}</span></a></td>
+	          <td>{{$merchant.tel}}</td>
+	          <td>{{$merchant.worktime}}</td>
+	          <td>{{$merchant.address}}</td>
+	          <td data-id="{{$merchant.id}}">
+                  <a href="#" data-toggle="modal" data-target="#myModal" class="show_merchant"><span class="badge">查看/编辑</span></a>
+                  <a href={{:U('Merchant/order_list',"id=$merchant[id]")}} target="_blank"><span class="badge">订单管理</span></a>
+              </td>
+	        </tr>
+	    </volist>
+      </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <form class="form-horizontal" method="post" action="{{:U('Merchant/update')}}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">查看/编辑商户信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" class="inputId" value="" name="id">
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">商户名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputName" name="name" placeholder="请填写商户名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTel" class="col-sm-2 control-label">商户电话</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputTel" name="tel" placeholder="请填写商户电话">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputWorktime" class="col-sm-2 control-label">营业时间</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputWorktime" name="worktime" placeholder="请填写营业时间">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAddress" class="col-sm-2 control-label">商户地址</label>
+                            <div class="col-sm-10">
+                                <textarea rows="3" class="form-control" id="inputAddress" name="address" placeholder="请填写商户地址"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputInfo" class="col-sm-2 control-label">商户信息</label>
+                            <div class="col-sm-10">
+                                <textarea rows="5" class="form-control" id="inputInfo" name="info" placeholder="请填写商户信息"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</block>
+
+<block name="js">
+    <script src="__PUBLIC__/js/admin/merchant.js"></script>
+</block>

@@ -1,0 +1,14 @@
+body {
+  padding-top: 70px; }
+
+.badge {
+  background-color: #269abc; }
+
+.MerchantName:hover {
+  text-decoration: none;
+  color: limegreen; }
+
+.foodNameList {
+  list-style: none; }
+
+/*# sourceMappingURL=common.css.map */
